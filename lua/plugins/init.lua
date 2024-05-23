@@ -14,7 +14,7 @@ return {
        require "configs.lspconfig"
      end,
    },
-  --
+
   {
     "williamboman/mason.nvim",
     opts = {
@@ -25,6 +25,7 @@ return {
       },
   	},
    },
+
    {
    	"nvim-treesitter/nvim-treesitter",
    	opts = {
@@ -34,6 +35,7 @@ return {
    		},
    	},
    },
+   
   {
     "David-Kunz/gen.nvim",
     lazy = false,
@@ -60,5 +62,25 @@ return {
     config = function()
       require "configs.noice"
     end
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = { "hrsh7th/cmp-emoji" },
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      table.insert(opts.sources, { name = "emoji" })
+    end,
+  },
+  {
+    'linux-cultist/venv-selector.nvim',
+    dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+    opts = {
+      name = ".venv",
+    },
+    event = 'VeryLazy',
+    keys = {
+      { '<leader>vs', '<cmd>VenvSelect<cr>' },
+      { '<leader>vc', '<cmd>VenvSelectCached<cr>' },
+    },
   }
 }
